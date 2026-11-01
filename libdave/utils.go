@@ -1,6 +1,7 @@
 package libdave
 
 // #include <stdlib.h>
+// #include "dave.h"
 // #include <stdint.h>
 import "C"
 import (
@@ -30,7 +31,7 @@ func newByteSlice(cArray *C.uint8_t, length C.size_t) []byte {
 	slice := make([]byte, length)
 	copy(slice, view)
 
-	C.free(unsafe.Pointer(cArray))
+	C.daveFree(unsafe.Pointer(cArray))
 
 	return slice
 }
@@ -43,7 +44,7 @@ func newUint64Slice(cArray *C.uint64_t, length C.size_t) []uint64 {
 	slice := make([]uint64, length)
 	copy(slice, view)
 
-	C.free(unsafe.Pointer(cArray))
+	C.daveFree(unsafe.Pointer(cArray))
 
 	return slice
 }
